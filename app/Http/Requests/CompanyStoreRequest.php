@@ -25,12 +25,12 @@ class CompanyStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', 'string', Rule::unique('companies')->ignore(Auth::id())],
-            'code' => ['required', 'numeric', 'min:5', Rule::unique('companies')->ignore(Auth::id())],
-            'pvm_code' => ['required', 'string', Rule::unique('companies')->ignore(Auth::id())],
+            'name' => ['required', 'string', Rule::unique('companies', 'name')],
+            'code' => ['required', 'numeric', 'min:5', Rule::unique('companies', 'code')],
+            'pvm_code' => ['required', 'string', Rule::unique('companies', 'pvm_code')],
             'address' => 'required|string',
-            'telephone' => ['required', 'string', 'regex:/(86|\+3706)\d{7}/', Rule::unique('companies')->ignore(Auth::id())],
-            'email' => ['required', 'email', Rule::unique('companies')->ignore(Auth::id())],
+            'telephone' => ['required', 'string', 'regex:/(86|\+3706)\d{7}/', Rule::unique('companies', 'telephone')],
+            'email' => ['required', 'email', Rule::unique('companies', 'email')],
             'CEO' => 'required|string',
         ];
     }

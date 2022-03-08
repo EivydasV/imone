@@ -1,5 +1,3 @@
-
-
 @extends('layouts.app')
 
 @section('content')
@@ -26,12 +24,15 @@
                     </tr>
                 </thead>
                 <tbody>
-                @foreach ($companies as $company)   
                     <tr>
                         <th scope="row">{{$company->id}}</th>
-                        <td><a href="{{route('companies.show', $company->id)}}">{{$company->name}}</a></td>
+                        <td>{{$company->name}}</td>
                         <td>{{$company->address}}</td>
+                        <td>{{$company->pvm_code}}</td>
+                        <td>{{$company->address}}</td>
+                        <td>{{$company->telephone}}</td>
                         <td>{{$company->email}}</td>
+                        <td>{{$company->CEO}}</td>
                         @can('edit-company', $company)
                             <td> <a type="submit" href="{{route('companies.edit', $company->id)}}" class="btn btn-secondary">Edit</a></td>
                         @endcan
@@ -45,18 +46,13 @@
                                 </form>
                             </td>
                         @endcan
-                </a>
-                @endforeach
+                     
+                    </tr>
                     
                     
                 </tbody>
                 </table>
-                @if(method_exists($companies,'links'))
-                <div class="d-flex justify-content-center">
-                    {{$companies->links()}}
-                </div>
-                @endif
-                
+
             </div>
         </div>
     </div>

@@ -14,16 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
  */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-Auth::routes();
-Route::get('/', function () {
-    return redirect(route('login'));
-});
-Route::get('/home', function () {
-    return view('home');
-})->middleware('auth');
 
-Route::post('companies/search', [CompanyController::class, 'index']);
-Route::resource('companies', CompanyController::class, ['except' => ['index']]);
+Auth::routes();
+
+
+Route::post('companies/search', [CompanyController::class, 'search'])->name('search')->middleware('auth');
+Route::resource('companies', CompanyController::class);

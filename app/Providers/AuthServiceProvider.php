@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Providers;
+use App\Models\Company;
+use App\Policies\CompanyPolicy;
 
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
@@ -24,6 +26,14 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
+
+        Gate::define('edit-company', function ($user, $company) {
+            return $user->id == $company->user_id;
+        });
+        Gate::define('delete-company', function ($user, $company) {
+            return $user->id == $company->user_id;
+        });
+        
 
         //
     }
